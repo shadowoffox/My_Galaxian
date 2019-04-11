@@ -88,11 +88,11 @@ public class GameScreen extends BaseScreen {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         touch.set(screenX,Gdx.graphics.getHeight()-screenY);
         System.out.println("touch " +touch.x + " " + touch.y);
-        v=touch.sub(pos);
+        v=touch.cpy().sub(pos);
         System.out.println("v= " + v.x + " " + v.y);
-        if (v.x>pos.x & v.x>0 ){v2.x=1f;}
+        if (v.x>0 ){v2.x=1f;}
         else{v2.x=-1f;}
-        if (v.y>pos.y & v.y>0){v2.y=1f;}
+        if (v.y>0){v2.y=1f;}
         else{v2.y=-1f;}
         System.out.println("v2= " +v2.x + " " +v2.y);
         System.out.println("pos= " +pos.x + " " +pos.y );
