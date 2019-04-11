@@ -32,16 +32,14 @@ public class GameScreen extends BaseScreen {
     @Override
     public void show() {
         super.show();
-        touch = new Vector2();
-        pos = new Vector2();
-        v = new Vector2();
-        v2 = new Vector2();
-
-
 
         batch = new SpriteBatch();
         img = new Texture("images/ewq.png");
         ship = new Texture("images/bgbattleship.png");
+        touch = new Vector2();
+        pos = new Vector2(ship.getWidth()/2,ship.getHeight()/2);
+        v = new Vector2();
+        v2 = new Vector2();
         for (int i = 0; i < STAR_COUNT; i++) {
 
             region[i] = new TextureRegion(img, (i * STEP_NEXT_STAR_WIDTH), 0, STAR_WIDTH, STAR_HEIGHT);
@@ -63,9 +61,12 @@ public class GameScreen extends BaseScreen {
 
         batch.begin();
         batch.draw(background,0,0,Gdx.app.getGraphics().getWidth(),Gdx.app.getGraphics().getHeight());
-        if (pos.x!=touch.x){pos.x+=v2.x;}
-        if (pos.y!=touch.y){pos.y+=v2.y;}
-        batch.draw(ship,pos.x,pos.y);
+        if (pos.x<touch.x){pos.x+=v2.x;}
+        else if (pos.x>touch.x){pos.x-=v2.x;}
+
+        if (pos.y<touch.y){pos.y+=v2.y;}
+        else if (pos.y>touch.y){pos.y-=v2.y;}
+        batch.draw(ship,pos.x-ship.getWidth()/2,pos.y-ship.getHeight()/2);
         batch.end();
 
     }
@@ -90,10 +91,11 @@ public class GameScreen extends BaseScreen {
         System.out.println("touch " +touch.x + " " + touch.y);
         v=touch.cpy().sub(pos);
         System.out.println("v= " + v.x + " " + v.y);
-        if (v.x>0 ){v2.x=1f;}
-        else{v2.x=-1f;}
-        if (v.y>0){v2.y=1f;}
-        else{v2.y=-1f;}
+
+        if (v.x>0 ){v2.x=1f*v.nor().x;}
+        else{v2.x=-1f*v.nor().x;}
+        if (v.y>0){v2.y=1f*v.nor().y;}
+        else{v2.y=-1f*v.nor().y;}
         System.out.println("v2= " +v2.x + " " +v2.y);
         System.out.println("pos= " +pos.x + " " +pos.y );
         return false;
