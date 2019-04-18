@@ -12,8 +12,8 @@ import com.mygdx.game.math.Rect;
 public class Sprite extends Rect {
     float angle;
     float scale = 1f;
-    TextureRegion[] regions;
-    int frame;
+    protected TextureRegion[] regions;
+    protected int frame;
     protected Animation animation;
     float stateTime;
     protected TextureRegion animateRegion;
@@ -23,20 +23,30 @@ public class Sprite extends Rect {
         regions[0] = region;
     }
 
-    public Sprite(Texture region, int width, int height) {
-    this.regions =new TextureRegion[13];
-        for (int i = 0; i < 13; i++) {
-           this.regions[i] = new TextureRegion(region, (i * width), 0,width, height);
+    public Sprite(Texture texture, int count, int width, int height) {
+    this.regions =new TextureRegion[count];
+        for (int i = 0; i < count; i++) {
+           this.regions[i] = new TextureRegion(texture, (i * width), 0,width, height);
             regions[i].getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         }
         animation = new Animation(0.5f, regions);
     }
 
-    public void draw(SpriteBatch batch) {
+    public void anidraw(SpriteBatch batch) {
         stateTime += Gdx.graphics.getDeltaTime();
         animateRegion = (TextureRegion) animation.getKeyFrame(stateTime, true);
         batch.draw(
                 animateRegion,
+                getLeft(),getBottom(),
+                halfWidth,halfHeight,
+                getWidth(),getHeight(),
+                scale,scale,angle
+        );
+    }
+
+    public void draw(SpriteBatch batch) {
+        batch.draw(
+                regions[frame],
                 getLeft(),getBottom(),
                 halfWidth,halfHeight,
                 getWidth(),getHeight(),
