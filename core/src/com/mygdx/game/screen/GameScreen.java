@@ -1,5 +1,7 @@
 package com.mygdx.game.screen;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -17,6 +19,7 @@ public class GameScreen extends BaseScreen {
     private Ship ship;
     private Vector2 v;
     private TextureAtlas textureAtlas;
+    private Music music;
 
 
     @Override
@@ -26,7 +29,9 @@ public class GameScreen extends BaseScreen {
         bg = new Texture("images/ewq.png");
         background = new Background(bg,COUNT,490,350);
         ship = new Ship(new TextureRegion(sh));
-
+        music = Gdx.audio.newMusic(Gdx.files.internal("music/Battle in the winter.mp3"));
+        music.play();
+        music.setLooping(true);
     }
 
     @Override
@@ -55,6 +60,7 @@ public class GameScreen extends BaseScreen {
     public void dispose() {
         super.dispose();
         bg.dispose();
+        music.dispose();
     }
 
     @Override
