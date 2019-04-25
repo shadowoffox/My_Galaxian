@@ -25,6 +25,7 @@ public abstract class TouchUpButton extends Sprite {
         scale = PRESS_SCALE;
         pressed = true;
         return false;
+
     }
 
     @Override

@@ -15,7 +15,7 @@ import com.mygdx.game.math.Rect;
 public abstract class BaseScreen implements Screen, InputProcessor {
  public  SpriteBatch batch;
 
-    Rect worldBounds;
+    protected Rect worldBounds;
     Rect screenBounds;
     Rect glBownds;
     Vector2 touch;

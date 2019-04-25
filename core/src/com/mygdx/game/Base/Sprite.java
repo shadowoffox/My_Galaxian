@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.math.Rect;
+import com.mygdx.game.utils.Regions;
 
 
 public class Sprite extends Rect {
@@ -17,6 +18,7 @@ public class Sprite extends Rect {
     protected Animation animation;
     float stateTime;
     protected TextureRegion animateRegion;
+    private boolean isDestroyed;
 
     public Sprite(TextureRegion region){
         regions = new TextureRegion[1];
@@ -30,6 +32,13 @@ public class Sprite extends Rect {
             regions[i].getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         }
         animation = new Animation(0.5f, regions);
+    }
+
+    public Sprite(TextureRegion region, int rows, int cols, int frames) {
+        this.regions = Regions.split(region, rows, cols, frames);
+    }
+
+    public Sprite() {
     }
 
     public void anidraw(SpriteBatch batch) {
@@ -91,4 +100,15 @@ public class Sprite extends Rect {
         this.scale = scale;
     }
 
+    public void destroy() {
+        isDestroyed = true;
+    }
+
+    public void flushDestroy() {
+        isDestroyed = false;
+    }
+
+    public boolean isDestroyed() {
+        return isDestroyed;
+    }
 }

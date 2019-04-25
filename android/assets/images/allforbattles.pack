@@ -1,0 +1,47 @@
+
+allforbattles.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+beams-2
+  rotate: false
+  xy: 1, 173
+  size: 358, 544
+  orig: 358, 544
+  offset: 0, 0
+  index: -1
+beams-1
+  rotate: false
+  xy: 361, 173
+  size: 324, 544
+  orig: 324, 544
+  offset: 0, 0
+  index: -1
+beams-4
+  rotate: false
+  xy: 687, 173
+  size: 292, 544
+  orig: 292, 544
+  offset: 0, 0
+  index: -1
+bgbattleship
+  rotate: false
+  xy: 1, 51
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
+saucer1b
+  rotate: false
+  xy: 1, 1
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+saucer2b
+  rotate: false
+  xy: 123, 123
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
