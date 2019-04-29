@@ -7,7 +7,12 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Base.Sprite;
 import com.mygdx.game.math.Rect;
 import com.mygdx.game.pool.BulletPool;
+import com.mygdx.game.pool.ExplosionPool;
 import com.mygdx.game.sprite.Bullet;
+import com.mygdx.game.sprite.Explosion;
+
+import sun.java2d.pipe.DrawImage;
+
 
 public class Ship extends Sprite {
     protected Sound shootSound;
@@ -23,6 +28,11 @@ public class Ship extends Sprite {
 
     protected float reloadInterval;
     protected float reloadTimer;
+
+    protected float damageInterval = 0.09f;
+    protected float damageTimer = damageInterval;
+
+    protected ExplosionPool explosionPool;
 
     public Ship(TextureRegion region, int rows, int cols, int frames) {
         super(region, rows, cols, frames);
@@ -51,21 +61,48 @@ public class Ship extends Sprite {
     public void update(float delta) {
         super.update(delta);
         pos.mulAdd(v, delta);
+        damageTimer += delta;
+        if (damageTimer >= damageInterval) {
+            scale = 1f;
+        }
     }
 
-   public void shoot(){
-       Bullet bullet = (Bullet) bulletPool.obtain();
-       bullet.set(this, bulletRegion, pos, bulletV, bulletHeight, worldBounds, damage);
-       shootSound.play();
-   }
+    public void shoot() {
+        Bullet bullet = (Bullet) bulletPool.obtain();
+        bullet.set(this, bulletRegion, pos, bulletV, bulletHeight, worldBounds, damage);
+        shootSound.play();
+    }
 
-    public void takeDamage(int damage){
+    public void takeDamage(int damage) {
+        scale = 0f;
+        damageTimer = 0f;
         this.hp -= damage;
-        if (hp <= 0){
+        if (hp <= 0) {
+            boom();
             destroy();
         }
     }
-    public int getHP(){
+    public void boom(){
+        Explosion explosion = explosionPool.obtain();
+        explosion.set(this.getWidth(),this.pos);
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public int getHP() {
         return hp;
+    }
+
+    public void setHP(int hp) {
+        this.hp=hp;
+    }
+
+    public boolean isBulletCollision(Rect bullet) {
+        return !(bullet.getRight() < getLeft() ||
+                bullet.getLeft() > getRight() ||
+                bullet.getBottom() > pos.y ||
+                bullet.getTop() < getBottom());
     }
 }

@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Base.Ship;
 import com.mygdx.game.math.Rect;
 import com.mygdx.game.pool.BulletPool;
+import com.mygdx.game.pool.ExplosionPool;
 
 public class Enemy extends Ship {
     private enum State {DESCENT, FIGHT}
@@ -14,9 +15,10 @@ public class Enemy extends Ship {
 
     private MyShip myShip;
 
-    public Enemy(BulletPool bulletPool, Sound shootSound, Rect worldBounds, MyShip myShip) {
+    public Enemy(BulletPool bulletPool, ExplosionPool explosionPool,Sound shootSound, Rect worldBounds, MyShip myShip) {
         this.myShip = myShip;
         this.bulletPool = bulletPool;
+        this.explosionPool = explosionPool;
         this.worldBounds = worldBounds;
         this.shootSound = shootSound;
         this.descentV = new Vector2(0, -0.3f);
@@ -36,9 +38,16 @@ public class Enemy extends Ship {
                 shoot();
             }
         }
-        if (isOutside(worldBounds)) {
+        if (getBottom()<worldBounds.getBottom()){
             destroy();
+            myShip.takeDamage(1);
         }
+    }
+    public boolean isBulletCollision(Rect bullet){
+        return !(bullet.getRight()<getLeft() ||
+                 bullet.getLeft()>getRight() ||
+                 bullet.getBottom()> getTop()||
+                 bullet.getTop()< pos.y);
     }
 
     public void set(

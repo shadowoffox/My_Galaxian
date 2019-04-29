@@ -3,7 +3,6 @@ package com.mygdx.game.sprite;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.Base.TouchUpButton;
 import com.mygdx.game.math.Rect;
 

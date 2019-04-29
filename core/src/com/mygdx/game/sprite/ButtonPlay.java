@@ -4,11 +4,10 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.Base.TouchUpButton;
 import com.mygdx.game.math.Rect;
 import com.mygdx.game.screen.GameScreen;
-import com.mygdx.game.screen.MenuScreen;
+
 
 public class ButtonPlay extends TouchUpButton {
 
@@ -32,7 +31,7 @@ public class ButtonPlay extends TouchUpButton {
     protected void action() {
         sound.play();
         try {
-            Thread.sleep(4000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Base.Ship;
 import com.mygdx.game.math.Rect;
 import com.mygdx.game.pool.BulletPool;
+import com.mygdx.game.pool.ExplosionPool;
 
 public class MyShip extends Ship {
 
@@ -16,9 +17,11 @@ public class MyShip extends Ship {
     private int leftPointer = INVALID_POINTER;
 
 
-    public MyShip(TextureAtlas atlas, BulletPool bulletPool, Sound shootSound) {
-        super(atlas.findRegion("bgbattleship"), 1, 1, 2);
+
+    public MyShip(TextureAtlas atlas, BulletPool bulletPool, ExplosionPool explosionPool, Sound shootSound) {
+        super(atlas.findRegion("bgbattleship"), 1, 1, 1);
         this.bulletPool = bulletPool;
+        this.explosionPool = explosionPool;
         this.bulletRegion = atlas.findRegion("beams-2");
         this.shootSound = shootSound;
         setWidthProportion(0.15f);
@@ -102,4 +105,6 @@ public class MyShip extends Ship {
     private void stop() {
         v.setZero();
     }
+
+
 }

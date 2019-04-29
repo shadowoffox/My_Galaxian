@@ -48,7 +48,6 @@ public class MenuScreen extends BaseScreen {
     public void resize(Rect worldBounds) {
         super.resize(worldBounds);
         background.resize(worldBounds);
-
         buttonExit.resize(worldBounds);
         buttonPlay.resize(worldBounds);
     }
