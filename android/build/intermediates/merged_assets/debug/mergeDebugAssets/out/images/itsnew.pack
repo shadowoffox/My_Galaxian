@@ -1,0 +1,26 @@
+
+itsnew.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+explosion
+  rotate: false
+  xy: 1, 36
+  size: 2560, 1795
+  orig: 2560, 1795
+  offset: 0, 0
+  index: -1
+game_over
+  rotate: false
+  xy: 1, 1
+  size: 192, 33
+  orig: 192, 33
+  offset: 0, 0
+  index: -1
+new_game
+  rotate: false
+  xy: 2563, 1798
+  size: 170, 33
+  orig: 170, 33
+  offset: 0, 0
+  index: -1

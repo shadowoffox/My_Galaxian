@@ -14,14 +14,16 @@ public class Enemy extends Ship {
     private Vector2 descentV;
 
     private MyShip myShip;
+    private HpBar hpBar;
 
-    public Enemy(BulletPool bulletPool, ExplosionPool explosionPool,Sound shootSound, Rect worldBounds, MyShip myShip) {
+    public Enemy(BulletPool bulletPool, ExplosionPool explosionPool,Sound shootSound, Rect worldBounds, MyShip myShip, HpBar hpBar) {
         this.myShip = myShip;
         this.bulletPool = bulletPool;
         this.explosionPool = explosionPool;
         this.worldBounds = worldBounds;
         this.shootSound = shootSound;
         this.descentV = new Vector2(0, -0.3f);
+        this.hpBar=hpBar;
     }
 
     @Override
@@ -41,6 +43,7 @@ public class Enemy extends Ship {
         if (getBottom()<worldBounds.getBottom()){
             destroy();
             myShip.takeDamage(1);
+            hpBar.updateHp(9-(myShip.getHP()-1),hpBar.getSize()-0.01f);
         }
     }
     public boolean isBulletCollision(Rect bullet){

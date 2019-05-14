@@ -91,6 +91,8 @@ public class Ship extends Sprite {
         return damage;
     }
 
+    public void setDamage(int damage) {this.damage=damage; }
+
     public int getHP() {
         return hp;
     }

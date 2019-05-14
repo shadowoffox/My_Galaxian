@@ -30,11 +30,6 @@ public class ButtonPlay extends TouchUpButton {
     @Override
     protected void action() {
         sound.play();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         sound.stop();
         sound.dispose();
         game.setScreen(new GameScreen());

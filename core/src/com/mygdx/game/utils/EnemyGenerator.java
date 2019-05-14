@@ -6,22 +6,23 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.math.Rect;
 import com.mygdx.game.math.Rnd;
 import com.mygdx.game.pool.EnemyPool;
+import com.mygdx.game.screen.GameScreen;
 import com.mygdx.game.sprite.Enemy;
 
 public class EnemyGenerator {
-    private static final float ENEMY_NONE_FIRE_HEIGHT = 0.1f;
+    private static final float ENEMY_NONE_FIRE_WIDTH = 0.05f;
     private static final float ENEMY_NONE_FIRE_BULLET_HEIGHT = 0f;
-    private static final float ENEMY_NONE_FIRE_BULLET_VY = -10f;
-    private static final int ENEMY_NONE_FIRE_DAMAGE = 1;
-    private static final float ENEMY_NONE_FIRE_RELOAD_INTERVAL = 100f;
-    private static final int ENEMY_NONE_FIRE_HP = 5;
+    private static final float ENEMY_NONE_FIRE_BULLET_VY = -0.20f;
+    private static final int ENEMY_NONE_FIRE_DAMAGE = 0;
+    private static final float ENEMY_NONE_FIRE_RELOAD_INTERVAL = 10f;
+    private static final int ENEMY_NONE_FIRE_HP = 1;
 
-    private static final float ENEMY_MEDIUM_HEIGHT = 0.1f;
-    private static final float ENEMY_MEDIUM_BULLET_HEIGHT = 0.06f;
+    private static final float ENEMY_MEDIUM_WIDTH = 0.07f;
+    private static final float ENEMY_MEDIUM_BULLET_HEIGHT = 0.05f;
     private static final float ENEMY_MEDIUM_BULLET_VY = -0.20f;
-    private static final int ENEMY_MEDIUM_DAMAGE = 5;
-    private static final float ENEMY_MEDIUM_RELOAD_INTERVAL = 3f;
-    private static final int ENEMY_MEDIUM_HP = 5;
+    private static final int ENEMY_MEDIUM_DAMAGE = 3;
+    private static final float ENEMY_MEDIUM_RELOAD_INTERVAL = 2.5f;
+    private static final int ENEMY_MEDIUM_HP = 3;
 
     private Rect worldBounds;
 
@@ -31,12 +32,14 @@ public class EnemyGenerator {
     private final TextureRegion[] enemyNoneFireRegion;
     private final TextureRegion[] enemyMediumRegion;
 
-    private final Vector2 enemyNoneFireV = new Vector2(0, -0.3f);
-    private final Vector2 enemyMediumV = new Vector2(0, -0.06f);
+    private final Vector2 enemyNoneFireV = new Vector2(0, -0.2f);
+    private final Vector2 enemyMediumV = new Vector2(0, -0.03f);
 
     private final TextureRegion bulletRegion;
 
     private final EnemyPool enemyPool;
+
+    int args=1;
 
     public EnemyGenerator(TextureAtlas atlas, EnemyPool enemyPool, Rect worldBounds) {
         TextureRegion enemy0 = atlas.findRegion("saucer1b");
@@ -48,7 +51,8 @@ public class EnemyGenerator {
         this.worldBounds = worldBounds;
     }
 
-    public void generate(float delta) {
+    public void generate(float delta, int stage) {
+        args = stage/2 +1;
         generateTimer += delta;
         if (generateTimer >= generateInterval) {
             generateTimer = 0f;
@@ -63,8 +67,8 @@ public class EnemyGenerator {
                         ENEMY_NONE_FIRE_BULLET_VY,
                         ENEMY_NONE_FIRE_DAMAGE,
                         ENEMY_NONE_FIRE_RELOAD_INTERVAL,
-                        ENEMY_NONE_FIRE_HEIGHT,
-                        ENEMY_NONE_FIRE_HP
+                        ENEMY_NONE_FIRE_WIDTH,
+                        ENEMY_NONE_FIRE_HP*args
                 );
             } else if (type < 0.85f) {
                 enemy.set(
@@ -73,14 +77,14 @@ public class EnemyGenerator {
                         bulletRegion,
                         ENEMY_MEDIUM_BULLET_HEIGHT,
                         ENEMY_MEDIUM_BULLET_VY,
-                        ENEMY_MEDIUM_DAMAGE,
+                        ENEMY_MEDIUM_DAMAGE*args,
                         ENEMY_MEDIUM_RELOAD_INTERVAL,
-                        ENEMY_MEDIUM_HEIGHT,
+                        ENEMY_MEDIUM_WIDTH,
                         ENEMY_MEDIUM_HP
                 );
             }
             enemy.pos.x = Rnd.nextFloat(worldBounds.getLeft() + enemy.getHalfWidth(),
-                    worldBounds.getRight() - enemy.getHalfWidth());
+            worldBounds.getRight() - enemy.getHalfWidth());
             enemy.setBottom(worldBounds.getTop());
         }
     }

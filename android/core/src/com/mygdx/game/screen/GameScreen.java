@@ -9,7 +9,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Base.BaseScreen;
 import com.mygdx.game.math.Rect;
 import com.mygdx.game.sprite.Background;
-import com.mygdx.game.sprite.Ship;
 
 public class GameScreen extends BaseScreen {
     private static final int COUNT = 13;

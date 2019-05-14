@@ -14,15 +14,24 @@ public class Sprite extends Rect {
     float angle;
     float scale = 1f;
     protected TextureRegion[] regions;
+    protected TextureRegion[] regions1;
     protected int frame;
+    public static int frame1;
     protected Animation animation;
     float stateTime;
     protected TextureRegion animateRegion;
     private boolean isDestroyed;
 
+
     public Sprite(TextureRegion region){
         regions = new TextureRegion[1];
         regions[0] = region;
+
+    }
+    public Sprite(TextureRegion region, int x, int y, int width, int height){
+        regions = new TextureRegion[1];
+        regions[0] = new TextureRegion(region,x,y,width,height);
+
     }
 
     public Sprite(Texture texture, int count, int width, int height) {
@@ -36,6 +45,12 @@ public class Sprite extends Rect {
 
     public Sprite(TextureRegion region, int rows, int cols, int frames) {
         this.regions = Regions.split(region, rows, cols, frames);
+    }
+    public Sprite(Texture region, int height, int width) {
+        this.regions1 =new TextureRegion[10];
+        for (int j = 0; j < 10; j++) {
+            this.regions1[j] = new TextureRegion(region, 145, 149, width-(j*10), height);
+        }
     }
 
     public Sprite() {
@@ -62,6 +77,16 @@ public class Sprite extends Rect {
                 scale,scale,angle
         );
     }
+    public void ndraw(SpriteBatch batch) {
+        batch.draw(
+                regions1[frame1],
+                getLeft(),getBottom(),
+                halfWidth,halfHeight,
+                getWidth(),getHeight(),
+                scale,scale,angle
+        );
+    }
+
 
     public void resize(Rect worldBounds) {
 
@@ -74,6 +99,11 @@ public class Sprite extends Rect {
     public void setWidthProportion(float width) {
         setWidth(width);
         float aspect = regions[frame].getRegionHeight() / (float) regions[frame].getRegionWidth();
+        setHeight(width * aspect);
+    }
+    public void setWidthProportion1(float width) {
+        setWidth(width);
+        float aspect = regions1[frame].getRegionHeight() / (float) regions1[frame].getRegionWidth();
         setHeight(width * aspect);
     }
     public boolean touchDown(Vector2 touch, int pointer) {
@@ -111,4 +141,5 @@ public class Sprite extends Rect {
     public boolean isDestroyed() {
         return isDestroyed;
     }
+
 }

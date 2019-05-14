@@ -14,7 +14,7 @@ public class Explosion extends Sprite {
     }
     public void set (float width, Vector2 pos){
         this.pos.set(pos);
-        setWidthProportion(width);
+        setWidthProportion(0.35f);
     }
 
     @Override

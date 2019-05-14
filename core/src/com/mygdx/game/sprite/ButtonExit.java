@@ -26,14 +26,8 @@ public class ButtonExit extends TouchUpButton {
     @Override
     protected void action() {
         sound.play();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         sound.stop();
         sound.dispose();
-
         Gdx.app.exit();
     }
 }

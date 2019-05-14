@@ -16,7 +16,7 @@ public class MyShip extends Ship {
     private int rightPointer = INVALID_POINTER;
     private int leftPointer = INVALID_POINTER;
 
-
+    private static int HP = 10;
 
     public MyShip(TextureAtlas atlas, BulletPool bulletPool, ExplosionPool explosionPool, Sound shootSound) {
         super(atlas.findRegion("bgbattleship"), 1, 1, 1);
@@ -24,13 +24,21 @@ public class MyShip extends Ship {
         this.explosionPool = explosionPool;
         this.bulletRegion = atlas.findRegion("beams-2");
         this.shootSound = shootSound;
-        setWidthProportion(0.15f);
+        setWidthProportion(0.11f);
         this.reloadInterval = 1f;
         this.bulletV.set(0f, 0.5f);
-        this.bulletHeight = 0.07f;
+        this.bulletHeight = 0.09f;
         this.damage = 1;
-        this.v0.set(0.5f, 0);
-        this.hp = 5;
+        this.v0.set(0.6f, 0);
+        this.hp = HP;
+    }
+
+    public void reset(){
+        flushDestroy();
+        pos.x=worldBounds.pos.x;
+        v.setZero();
+        rightPointer = INVALID_POINTER;
+        leftPointer = INVALID_POINTER;
     }
 
     @Override
