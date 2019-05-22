@@ -73,7 +73,7 @@ public class GameScreen extends BaseScreen {
         buttonNewGame = new ButtonNewGame(atlas2,this);
         gameOver = new GameOver(atlas2,worldBounds);
         barHp = new Texture("images/items.png");
-        hpBar = new HpBar(barHp,worldBounds);
+        hpBar = new HpBar(barHp);
         ship = new MyShip(atlas, bulletPool,explosionPool,myLaser);
         enemyPool = new EnemyPool(bulletPool, explosionPool,enemyLaser, worldBounds, ship,hpBar);
         enemyGenerator = new EnemyGenerator(atlas, enemyPool, worldBounds);
@@ -184,8 +184,9 @@ public class GameScreen extends BaseScreen {
 
                         if (ship.getHP()>=10){
                             ship.setHP(10);
+                            size=0.14f;
                         }
-                        hpBar.updateHp(hpOver-(ship.getHP()-1),size+=0.03f);
+                        hpBar.updateHp(hpOver-(ship.getHP()-1),size+=0.01f);
                         System.out.println("HP = " + ship.getHP());
                         System.out.println("frame"+(hpOver-(ship.getHP()-1)));
                         System.out.println("size"+size);

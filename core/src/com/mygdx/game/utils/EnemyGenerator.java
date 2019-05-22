@@ -70,7 +70,7 @@ public class EnemyGenerator {
                         ENEMY_NONE_FIRE_WIDTH,
                         ENEMY_NONE_FIRE_HP*args
                 );
-            } else if (type < 0.85f) {
+            } else {
                 enemy.set(
                         enemyMediumRegion,
                         enemyMediumV,

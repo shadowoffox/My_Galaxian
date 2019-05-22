@@ -8,11 +8,10 @@ import com.mygdx.game.math.Rect;
 
 public class HpBar extends Sprite {
     public float size;
-    public HpBar(Texture reg, Rect worldBounds){
+    public HpBar(Texture reg){
         super(reg,12,100);
-        setWidthProportion1(0.15f);
-        setLeft(worldBounds.getLeft()+0.27f);
-        setTop(worldBounds.getTop()+0.27f);
+       // setWidthProportion1(0.15f);
+
     }
 
    public void updateHp(int overHp, float size){
@@ -21,7 +20,16 @@ public class HpBar extends Sprite {
        setWidthProportion1(size);
    }
 
+    @Override
+    public void resize(Rect worldBounds) {
+        super.resize(worldBounds);
+        setWidthProportion1(0.15f);
+        setRight(worldBounds.getRight());
+        setTop(worldBounds.getTop());
+    }
+
     public float getSize() {
         return size;
     }
 }
+

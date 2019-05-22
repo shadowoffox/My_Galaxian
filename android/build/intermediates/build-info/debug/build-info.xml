@@ -6,7 +6,7 @@
     density="xxhdpi"
     format="10"
     plugin-version="3.2.0"
-    timestamp="1557841536059"
+    timestamp="1557905459181"
     token="-2062977213255305152"
     verifier="FULL_BUILD_REQUESTED" >
 
@@ -65,7 +65,7 @@
 
     <build
         build-mode="FULL"
-        timestamp="1557841536059"
+        timestamp="1557905459181"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="F:\Users\odv\AndroidStudioProjects\My_Galaxian-two\android\build\intermediates\split-apk\debug\slices\slice_7.apk"
