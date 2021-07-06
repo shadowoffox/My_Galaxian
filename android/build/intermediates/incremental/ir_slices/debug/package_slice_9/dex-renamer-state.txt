@@ -1,0 +1,4 @@
+#Wed May 15 10:29:38 MSK 2019
+base.0=F\:\\Users\\odv\\AndroidStudioProjects\\My_Galaxian-two\\android\\build\\intermediates\\transforms\\dexMerger\\debug\\9
+path.0=classes.dex
+renamed.0=classes.dex
